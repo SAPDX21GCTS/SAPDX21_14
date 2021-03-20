@@ -26,14 +26,14 @@ CLASS lc_tadir_unit_test IMPLEMENTATION.
 *    SELECT * FROM tadir UP  TO 4 ROWS INTO CORRESPONDING FIELDS OF TABLE @lt_table
 *      WHERE devclass = 'MB' AND obj_name LIKE 'Z%'.
 
-      lt_table = VALUE #(
-      ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z1' devclass = 'ZZZ' )
-      ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z2' devclass = 'ZZZ' )
-      ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z3' devclass = 'ZZZ' )
-      ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z4' devclass = 'YYY' )
-      "!!! comment this row to activate AUnit error add more
-      "( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z5' devclass = 'ZZZ' )
-      ).
+    lt_table = VALUE #(
+    ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z1' devclass = 'ZZZ' )
+    ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z2' devclass = 'ZZZ' )
+    ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z3' devclass = 'ZZZ' )
+    ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z4' devclass = 'YYY' )
+    "!!! comment this row to activate AUnit error add more
+    ( pgmid = 'R3TR' object = 'DOMA' obj_name = 'Z5' devclass = 'ZZZ' )
+    ).
 
     "DDIC
     "mr_test_environment = cl_osql_test_environment=>create(  i_dependency_list = VALUE #( ( 'TADIR' ) ) ).
@@ -66,7 +66,7 @@ CLASS lc_tadir_unit_test IMPLEMENTATION.
 
   METHOD _01_get_object_list.
 
-    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = data(lt_table) ).
+    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = DATA(lt_table) ).
 
     cl_abap_unit_assert=>assert_not_initial(
       EXPORTING
@@ -77,7 +77,7 @@ CLASS lc_tadir_unit_test IMPLEMENTATION.
 
   METHOD _02_get_object_list.
 
-    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = data(lt_table) ).
+    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = DATA(lt_table) ).
 
     cl_abap_unit_assert=>assert_number_between(
       EXPORTING
@@ -86,9 +86,9 @@ CLASS lc_tadir_unit_test IMPLEMENTATION.
         number           = lines( lt_table ) ).
 
   ENDMETHOD.
-    METHOD _03_get_object_list.
+  METHOD _03_get_object_list.
 
-    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = data(lt_table) ).
+    mo_cut->get_object_list( EXPORTING iv_devclass = 'ZZZ' IMPORTING et_table = DATA(lt_table) ).
 
     cl_abap_unit_assert=>assert_table_contains(
       EXPORTING
